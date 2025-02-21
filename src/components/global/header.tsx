@@ -15,7 +15,7 @@ const Header = () => {
         </Button>
         <Link
           href={ticketsPath()}
-          className={buttonVariants({ variant: 'outline' })}
+          className={buttonVariants({ variant: 'default' })}
         >
           Tickets
         </Link>

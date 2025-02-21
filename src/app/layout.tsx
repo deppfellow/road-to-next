@@ -1,11 +1,7 @@
-import Header from '@/components/global/header';
 import './globals.css';
-import { Button, buttonVariants } from '@/components/ui/button';
-import { homePath, ticketsPath } from '@/route';
-import { HardHat } from 'lucide-react';
+import Header from '@/components/global/header';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import Link from 'next/link';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
