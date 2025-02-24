@@ -1,16 +1,6 @@
 import Heading from '@/components/global/heading';
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
 import { initialTickets } from '@/data';
-import { ticketPath } from '@/route';
-import clsx from 'clsx';
-import { Ticket } from 'lucide-react';
-import Link from 'next/link';
+import TicketItem from '@/features/ticket/components/ticket-item';
 
 // const TicketIcon = () => {
 //   return (
@@ -42,44 +32,7 @@ export default function TicketsPage() {
       <div className="flex flex-col gap-y-8">
         <div className="flex flex-1 animate-fade-in-from-top flex-col items-center gap-y-4 md:grid md:grid-cols-3 md:gap-4 lg:grid-cols-4">
           {initialTickets.map((ticket) => {
-            return (
-              <Card key={ticket.id} className="w-full max-w-[420px]">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-x-2">
-                    <Ticket />
-                    <span
-                      className={clsx('truncate text-lg font-semibold', {
-                        'text-slate-500 line-through': ticket.status === 'Done',
-                      })}
-                    >
-                      {ticket.title}
-                    </span>
-                  </CardTitle>
-                </CardHeader>
-
-                <CardContent>
-                  <span
-                    className={clsx(
-                      'line-clamp-3 whitespace-break-spaces text-sm',
-                      {
-                        'line-through': ticket.status === 'Done',
-                      }
-                    )}
-                  >
-                    {ticket.content}
-                  </span>
-                </CardContent>
-
-                <CardFooter>
-                  <Link
-                    href={ticketPath(ticket.id)}
-                    className="text-sm underline"
-                  >
-                    See detail
-                  </Link>
-                </CardFooter>
-              </Card>
-            );
+            return <TicketItem key={ticket.id} ticket={ticket} />;
           })}
         </div>
       </div>
