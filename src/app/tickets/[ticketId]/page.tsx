@@ -1,6 +1,7 @@
 import Placeholder from '@/components/global/placeholder';
 import { Button } from '@/components/ui/button';
 import { initialTickets } from '@/data';
+import TicketItem from '@/features/ticket/components/ticket-item';
 import { ticketsPath } from '@/route';
 import Link from 'next/link';
 
@@ -28,14 +29,5 @@ export default function TicketPage({ params }: TicketPageParams) {
     );
   }
 
-  return (
-    <div>
-      <h1 className="text-2xl">{currentTicket?.title}</h1>
-      <span className="text-sm">
-        ID: {currentTicket?.id} | {currentTicket?.status}
-      </span>
-
-      <p className="my-4">{currentTicket?.content}</p>
-    </div>
-  );
+  return <TicketItem ticket={currentTicket} isDetail />;
 }

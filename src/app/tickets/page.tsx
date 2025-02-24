@@ -26,7 +26,7 @@ export default function TicketsPage() {
     <div className="flex flex-1 flex-col">
       <Heading
         headingTitle="All Tickets"
-        headingDescription="Get ur project. Achieve 200k million!!"
+        headingDescription="Get your project. Achieve 200k million!!"
       />
 
       <div className="flex flex-col gap-y-8">

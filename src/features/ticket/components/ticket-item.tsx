@@ -8,9 +8,10 @@ import { Ticket } from '../types';
 
 interface TicketItemProps {
   ticket: Ticket;
+  isDetail?: boolean;
 }
 
-const TicketItem = ({ ticket }: TicketItemProps) => {
+const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
   const detailButton = (
     <Button variant="ghost" size="icon" asChild>
       <Link href={ticketPath(ticket.id)} className="inline-block text-sm">
@@ -19,14 +20,20 @@ const TicketItem = ({ ticket }: TicketItemProps) => {
     </Button>
   );
   return (
-    <div className="flex gap-x-1">
-      <Card className="w-full max-w-[420px]">
+    <div
+      className={clsx('flex w-full gap-x-1', {
+        'max-w-[420px]': !isDetail,
+        'max-w-[600px]': isDetail,
+      })}
+    >
+      <Card className="w-full">
         <CardHeader>
           <CardTitle className="flex items-center gap-x-2">
             <LucideTicket />
             <span
               className={clsx('truncate text-lg font-semibold', {
-                'text-slate-500 line-through': ticket.status === 'Done',
+                'text-slate-500 line-through':
+                  ticket.status === 'Done' && !isDetail,
               })}
             >
               {ticket.title}
@@ -36,8 +43,9 @@ const TicketItem = ({ ticket }: TicketItemProps) => {
 
         <CardContent>
           <span
-            className={clsx('line-clamp-3 whitespace-break-spaces text-sm', {
-              'line-through': ticket.status === 'Done',
+            className={clsx('whitespace-break-spaces text-sm', {
+              'line-through': ticket.status === 'Done' && !isDetail,
+              'line-clamp-3': !isDetail,
             })}
           >
             {ticket.content}
@@ -45,7 +53,9 @@ const TicketItem = ({ ticket }: TicketItemProps) => {
         </CardContent>
       </Card>
 
-      <div className="flex flex-col gap-y-1">{detailButton}</div>
+      {isDetail ? null : (
+        <div className="flex flex-col gap-y-1">{detailButton}</div>
+      )}
     </div>
   );
 };

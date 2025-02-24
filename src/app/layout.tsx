@@ -1,5 +1,6 @@
 import './globals.css';
 import Header from '@/components/global/header';
+import ThemeProvider from '@/components/theme/theme-provider';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
@@ -24,14 +25,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
-        <main className="flex min-h-screen flex-1 flex-col overflow-y-auto overflow-x-hidden bg-secondary/20 px-8 py-16 md:px-48">
-          {children}
-        </main>
+        <ThemeProvider>
+          <Header />
+          <main className="flex min-h-screen flex-1 flex-col overflow-y-auto overflow-x-hidden bg-secondary/20 px-8 py-16 md:px-48">
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );
