@@ -43,9 +43,8 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
 
         <CardContent>
           <span
-            className={clsx('whitespace-break-spaces text-sm', {
+            className={clsx('line-clamp-3 whitespace-break-spaces text-sm', {
               'line-through': ticket.status === 'Done' && !isDetail,
-              'line-clamp-3': !isDetail,
             })}
           >
             {ticket.content}

@@ -1,6 +1,11 @@
+'use client';
+
 import Heading from '@/components/global/heading';
 import { initialTickets } from '@/data';
 import TicketItem from '@/features/ticket/components/ticket-item';
+import { getTickets } from '@/features/ticket/queries/get-tickets';
+import { Ticket } from '@/features/ticket/types';
+import { useEffect, useState } from 'react';
 
 // const TicketIcon = () => {
 //   return (
@@ -22,6 +27,17 @@ import TicketItem from '@/features/ticket/components/ticket-item';
 // };
 
 export default function TicketsPage() {
+  const [tickets, setTickets] = useState<Ticket[]>([]);
+
+  useEffect(() => {
+    const fetchTickets = async () => {
+      const result = await getTickets();
+      setTickets(result);
+    };
+
+    fetchTickets();
+  }, []);
+
   return (
     <div className="flex flex-1 flex-col">
       <Heading
@@ -31,8 +47,10 @@ export default function TicketsPage() {
 
       <div className="flex flex-col gap-y-8">
         <div className="flex flex-1 animate-fade-in-from-top flex-col items-center gap-y-4 md:grid md:grid-cols-3 md:gap-4 lg:grid-cols-4">
-          {initialTickets.map((ticket) => {
-            return <TicketItem key={ticket.id} ticket={ticket} />;
+          {tickets.map((ticket) => {
+            return (
+              <TicketItem key={ticket.id} ticket={ticket} isDetail={false} />
+            );
           })}
         </div>
       </div>
