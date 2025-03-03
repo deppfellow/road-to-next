@@ -1,11 +1,8 @@
-'use client';
-
 import Heading from '@/components/global/heading';
-import { initialTickets } from '@/data';
 import TicketItem from '@/features/ticket/components/ticket-item';
 import { getTickets } from '@/features/ticket/queries/get-tickets';
 import { Ticket } from '@/features/ticket/types';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 
 // const TicketIcon = () => {
 //   return (
@@ -26,17 +23,19 @@ import { useEffect, useState } from 'react';
 //   );
 // };
 
-export default function TicketsPage() {
-  const [tickets, setTickets] = useState<Ticket[]>([]);
+export default async function TicketsPage() {
+  const tickets = await getTickets();
 
-  useEffect(() => {
-    const fetchTickets = async () => {
-      const result = await getTickets();
-      setTickets(result);
-    };
+  // const [tickets, setTickets] = useState<Ticket[]>([]);
 
-    fetchTickets();
-  }, []);
+  // useEffect(() => {
+  //   const fetchTickets = async () => {
+  //     const result = await getTickets();
+  //     setTickets(result);
+  //   };
+
+  //   fetchTickets();
+  // }, []);
 
   return (
     <div className="flex flex-1 flex-col">
